@@ -46,10 +46,11 @@ if [ -z "$MYOUTDIR" ]; then
   echo "ERROR: no output directory is given via --outdir parameter!"
   exit 1
 fi
+set -x
 
+existing_archive="$PWD/$(echo $MYARCHIVE)"
 cd "$MYOUTDIR"
 
-existing_archive=$(echo $MYARCHIVE)
 if [ -e "$existing_archive" ]; then
   if [ "${existing_archive%.tar.gz}" != "$existing_archive" ]; then
     tar xfz "$existing_archive" --wildcards $MYFILES || exit 1
